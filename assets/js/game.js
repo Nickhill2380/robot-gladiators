@@ -1,17 +1,8 @@
-
-
-//You can also log multiple values at once like this
-
-//Games States
-//"WIN" - Player robot has defeated all enemy-robots
-//  *Fight all enemy-robots
-//  *Defeat each enemy-robots
-//"LOSE" - Player robot's health is zero or less
-
 var fight = function(enemy) {
    
     while (enemy.health > 0 && playerInfo.health > 0) { 
     var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
+    
 
     if (promptFight === "skip" || promptFight === "SKIP") {
         //comfirm player wants to skip
@@ -77,11 +68,12 @@ var startGame = function() {
     
 
 for(var i = 0; i < enemyInfo.length; i++) {
+    
         
     if (playerInfo.health > 0){
         //let player know what round they are in, remember that arrays start at 0 so it needs to have 1 added to it
         window.alert("Welcome to Robot Gladiators! Round " + ( i + 1 ) );
-    
+        
     //pick new enemy to fight based on the index of the enemy.names array
     var pickedEnemyObj = enemyInfo[i];
     
@@ -171,8 +163,19 @@ var randomNumber = function (min, max) {
     return value;
 };
 
+var getPlayerName = function () {
+    var name = "";
+
+    while (name === "" || name === null){
+        name = prompt ("What is your robot's name?");
+    }
+
+    console.log("Your robot's name is "  + name);
+    return name;
+};
+
 var playerInfo = {
-    name: window.prompt ("What is your robot's name?"),
+    name: getPlayerName(),
     health: 100,
     attack: 10,
     money: 10,
