@@ -1,21 +1,38 @@
+
+var fightOrSkip = function () {
+
+    var promptFight = window.prompt ('Would you like to FIGHT or SKIP this battle? Enter "Fight" or "SKIP" to choose.');
+
+    if (promptFight === "" || promptFight === null) {
+        window.alert ("You need to provide a valid answer! Please try again.");
+        return fightOrSkip();
+    }
+    promptFight = promptFight.toLowerCase();
+
+    if (promptFight === "skip") {
+        var confirmSkip = window.confirm("Are you sure you'd like to quit?");
+
+        if (confirmSkip) {
+            window.alert (playerInfo.name + " has decided to skip this fight. Goodbye!");
+
+            playerInfo.playerMoney = Math.max(0, playerInfo.money - 10);
+
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+
 var fight = function(enemy) {
    
     while (enemy.health > 0 && playerInfo.health > 0) { 
-    var promptFight = window.prompt("Would you like to FIGHT or SKIP this battle? Enter 'FIGHT' or 'SKIP' to choose.");
     
+      if (fightOrSkip()) {
+          break;
+      }
 
-    if (promptFight === "skip" || promptFight === "SKIP") {
-        //comfirm player wants to skip
-    var confirmSkip = window.confirm("Are you sure you'd like to quit?");
-        //if yes (true), leave fight
-        if (confirmSkip){
-        window.alert(playerInfo.name + " has decided to skip this fight. Goodbye!");
-        // subtract money from playerInfo.money for skipping
-        playerInfo.money = Math.max(0, playerInfo.money - 10);
-        console.log("playerInfo.money", playerInfo.money);
-        break;
-        }
-    };
     
 //Subract the value of 'playerInfo.attack' from the value of 'enemy.health' and use that result to update the value in the 'enemy.health' variable
 var damage = randomNumber(playerInfo.attack -3, playerInfo.attack);
