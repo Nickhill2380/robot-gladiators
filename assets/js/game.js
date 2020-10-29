@@ -26,13 +26,24 @@ var fightOrSkip = function () {
 
 
 var fight = function(enemy) {
+
+    var isPlayerTurn = true;
+
+    if (Math.random()> 0.5) {
+        isPlayerTurn = false;
+    }
    
+    // if isPlayerTurn = true prompt fight or skip, if fight remove damage from enemy robot check out enemyrobot health
+    // if isPlayerTurn = false enemy robot attacks player see if player has survived
+    // if player went run enemy attack and if enemy went run player attack
+
+
     while (enemy.health > 0 && playerInfo.health > 0) { 
-    
+     if (isPlayerTurn) {
       if (fightOrSkip()) {
           break;
       }
-
+    
     
 //Subract the value of 'playerInfo.attack' from the value of 'enemy.health' and use that result to update the value in the 'enemy.health' variable
 var damage = randomNumber(playerInfo.attack -3, playerInfo.attack);
@@ -75,6 +86,8 @@ else {
 }
 } 
 
+isPlayerTurn = !isPlayerTurn;
+    }
 endGame();
 };
 
@@ -113,7 +126,7 @@ for(var i = 0; i < enemyInfo.length; i++) {
 }
 };
 
-startGame();
+endGame();
 };
 
 var endGame = function() {
@@ -124,13 +137,14 @@ var endGame = function() {
 else {
     window.alert("You've lost your robot in battle.");
 
+
     //ask player if they'd like to play again
     var playAgainConfirm = window.confirm("Would you like to play again?");
 
     if (playAgainConfirm) {
         //restart the game
         startGame();
-}
+    }
     else {
         window.alert("Thank you for playing Robot Gladiators! Come back soon!");
     }
